@@ -94,14 +94,14 @@ void serial_xfer_config(void)
 	usart_enable(serial_com_dev.uart_port );
 }
 
-#ifdef STM32F4
+
 void serial_debug_config(void)
 {
-	uint8_t text_len = strlen((char*)serial_tx_buffer);
+	//uint8_t text_len = strlen((char*)serial_tx_buffer);
 	serial_debug_dev.uart_port = USART2;
 
-	nvic_enable_irq(NVIC_DMA1_STREAM6_IRQ);
-	rcc_periph_clock_enable(RCC_DMA1);
+	//nvic_enable_irq(NVIC_DMA1_STREAM6_IRQ);
+	//rcc_periph_clock_enable(RCC_DMA1);
 
 	rcc_periph_clock_enable(RCC_USART2);
 	rcc_periph_clock_enable(RCC_GPIOA);
@@ -116,7 +116,7 @@ void serial_debug_config(void)
 	gpio_mode_setup(GPIOA, GPIO_MODE_AF , GPIO_PUPD_NONE, (GPIO2 | GPIO3));
 	gpio_set_af(GPIOA, GPIO_AF7, (GPIO2 | GPIO3));
 
-
+#ifdef STM32F4
 	/*Configure DMA for data transmission*/
 	dma_channel_select(DMA1, DMA_STREAM6, DMA_SxCR_CHSEL_4);
 	dma_set_transfer_mode(DMA1, DMA_STREAM6, DMA_SxCR_DIR_MEM_TO_PERIPHERAL);
@@ -133,10 +133,11 @@ void serial_debug_config(void)
 
 
 	usart_enable_tx_dma(USART2);
+#endif
+
 	usart_enable(USART2);
 	//dma_enable_stream(DMA1, DMA_STREAM6);
 }
-#endif
 
 /* Print strings on serial port USART2*/
 #ifdef STM32F4
