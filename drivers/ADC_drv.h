@@ -17,7 +17,7 @@
 #define V_REF				((uint32_t) 3000)
 #define VDDA_APPLI          ((uint32_t) 3300)
 #define RANGE_12BITS 		((uint32_t) 4095)
-
+#define ADC_DATA_REG		((0x40012400U + 0x58U))
 
 #define COMPUTATION_DIGITAL_12BITS_TO_VOLTAGE(ADC_DATA) (((ADC_DATA) * VDDA_APPLI) / RANGE_12BITS)
 
@@ -30,6 +30,9 @@
     ) / (int32_t)(*TS_CAL2_REG - *TS_CAL1_REG)                        \
    ) + 30                                                             \
   )
+
+
+extern bool_t dma_xfer_cmpl;
 
 
 void adc_config(void);
