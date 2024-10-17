@@ -9,15 +9,22 @@ int main(void)
 	led_config();
 
 	serial_debug_config();
-	adc_config();
+	clock_setup();
+	adc_setup();
+	dma_setup();
 	adc_enable_temp();
+
+
+	adc_enable_dma(ADC1);
+	adc_start_conversion_regular(ADC1);
 
 	while (1)
 	{
-		int16_t temperature = 0;
+		/*int16_t temperature = 0;
 
 		temperature = get_temperature();
-		printf("%d°C\n", temperature);
+		printf("%d°C\n", temperature);*/
+		__asm__("wfi");
 	}
 	return 0;
 }
