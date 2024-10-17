@@ -29,8 +29,8 @@ typedef struct
 
 /*User global functions*/
 int _write(int file, char *ptr, int len);
-void serial_debug_config(void);
-void serial_xfer_config(void);
+void serial_debug_setup(void);
+void serial_xfer_setup(void);
 void serial_put_s(char *data);
 
 status_t serial_send_pkt(serial_dev_t serial_dev, uint16_t size);

@@ -67,7 +67,7 @@ status_t serial_send_pkt(serial_dev_t serial_dev, uint16_t size)
 }
 
 
-void serial_xfer_config(void)
+void serial_xfer_setup(void)
 {
 	serial_com_dev.uart_port = USART1;
 	serial_com_dev.rx_buffer = serial_rx_buffer;
@@ -95,7 +95,7 @@ void serial_xfer_config(void)
 }
 
 
-void serial_debug_config(void)
+void serial_debug_setup(void)
 {
 	//uint8_t text_len = strlen((char*)serial_tx_buffer);
 	serial_debug_dev.uart_port = USART2;

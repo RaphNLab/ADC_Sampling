@@ -5,10 +5,10 @@
 
 int main(void)
 {
-	timer_sleep_config();
-	led_config();
+	timer_sleep_setup();
+	led_setup();
 
-	serial_debug_config();
+	serial_debug_setup();
 	clock_setup();
 	adc_setup();
 	dma_setup();

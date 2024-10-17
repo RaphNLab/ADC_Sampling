@@ -20,7 +20,7 @@
  * Public functions
  *
 */
-void led_config(void)
+void led_setup(void)
 {
 	rcc_periph_clock_enable(RCC_GPIOD);
 	/* Set GPIO6 (in GPIO port B) to 'output push-pull'. */

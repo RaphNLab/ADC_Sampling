@@ -34,6 +34,8 @@ void adc_setup(void)
 	adc_set_regular_sequence(ADC1, 1, (uint8_t[]){ADC_CHANNEL_TEMP});
 	adc_enable_temperature_sensor();
 	adc_enable_eoc_interrupt(ADC1);
+	adc_enable_external_trigger_regular(ADC1, ADC_CR2_EXTSEL_TIM4_TRGO, ADC_CR2_EXTEN_RISING_EDGE);
+
 	ADC_CR2(ADC1) |= ADC_CR2_DDS;
 	adc_power_on(ADC1);
 }
@@ -54,7 +56,6 @@ void dma_setup(void)
 	dma_enable_circular_mode(DMA1, DMA_CHANNEL);
 	dma_enable_transfer_complete_interrupt(DMA1, DMA_CHANNEL);
 }
-
 
 
 void adc_enable_temp(void)

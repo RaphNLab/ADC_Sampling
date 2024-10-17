@@ -38,7 +38,7 @@ void sleep_ms(uint16_t delay_ms)
 	}
 }
 
-void timer_sleep_config(void)
+void timer_sleep_setup(void)
 {
 	rcc_clock_setup_pll(&rcc_clock_config[RCC_CLOCK_VRANGE1_HSI_PLL_24MHZ]);
 	rcc_periph_clock_enable(RCC_TIM2);
@@ -50,7 +50,7 @@ void timer_sleep_config(void)
 }
 
 /*Configure timer 3 for debouncing*/
-void timer_debounce_config(void)
+void timer_debounce_setup(void)
 {
 	rcc_periph_clock_enable(RCC_TIM3);
 	nvic_enable_irq(NVIC_TIM3_IRQ);
@@ -59,6 +59,22 @@ void timer_debounce_config(void)
 	timer_set_period(TIM3, 10);
 	timer_set_mode(TIM3, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_EDGE, TIM_CR1_DIR_UP);
 	timer_enable_irq(TIM3, TIM_DIER_UIE);
+}
+
+void timer_adc_external_trigger_setup(void)
+{
+	rcc_periph_clock_enable(RCC_TIM4);
+	nvic_enable_irq(NVIC_TIM4_IRQ);
+
+	timer_set_prescaler(TIM4, 24000);
+	timer_set_period(TIM4, 10);
+	timer_set_mode(TIM4, TIM_CR1_CKD_CK_INT, TIM_CR1_CMS_EDGE, TIM_CR1_DIR_UP);
+	timer_enable_compare_control_update_on_trigger(TIM4);
+	timer_generate_event(TIM4, TIM_EGR_TG);
+	timer_enable_update_event(TIM4);
+
+	timer_enable_irq(TIM4, TIM_DIER_UIE);
+	timer_enable_counter(TIM4);
 }
 
 

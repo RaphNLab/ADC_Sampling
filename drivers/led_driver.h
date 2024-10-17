@@ -16,7 +16,7 @@ typedef enum
 	LED_RIGTH
 }blink_dir_t;
 
-void led_config(void);
+void led_setup(void);
 void led_ring(uint16_t delay, blink_dir_t direction);
 void led_heart_beat(uint16_t delay);
 
