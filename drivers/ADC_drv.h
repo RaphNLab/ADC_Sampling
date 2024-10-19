@@ -21,6 +21,8 @@
 #define VDDA_APPLI          ((uint32_t) 3300)
 #define RANGE_12BITS 		((uint32_t) 4095)
 #define ADC_DATA_REG		((0x40012400U + 0x58U))
+#define ADC_CHANNELS		2
+#define ADC_SAMPLES			100
 
 #define DMA_CHANNEL 1
 
@@ -37,15 +39,16 @@
   )
 
 
-extern bool_t dma_xfer_cmpl;
 
 void clock_setup(void);
 void adc_setup(void);
 void dma_setup(void);
 void timer_setup(void);
+void adc_task(void);
 void adc_enable_temp(void);
 uint16_t get_adc_value(void);
 int16_t get_temperature(void);
+
 
 
 
