@@ -5,3 +5,5 @@ generated.*
 .cproject
 *.bin
 *.elf
+build
+.vscode

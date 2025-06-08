@@ -3,9 +3,11 @@
  *
  *  Created on: Oct 8, 2024
  *      Author: silvere
- */
+*/
+
 #include "ADC_drv.h"
-#include "drivers/timer_drv.h"
+#include "timer_drv.h"
+#include "uart_drv.h"
 
 
 volatile uint16_t adc_dma_buf[ADC_CHANNELS];
@@ -27,15 +29,15 @@ void clock_setup(void)
 
 void adc_setup(void)
 {
-	nvic_enable_irq(NVIC_ADC1_IRQ);
+	nvic_enable_irq(NVIC_ADC1_IRQ);  // NOLINT
 
-	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO0);
+	gpio_mode_setup(GPIOA, GPIO_MODE_ANALOG, GPIO_PUPD_NONE, GPIO0);  // NOLINT
 
-	adc_power_off(ADC1);
-	adc_disable_scan_mode(ADC1);
-	adc_set_single_conversion_mode(ADC1);
+	adc_power_off(ADC1);  // NOLINT
+	adc_disable_scan_mode(ADC1);  // NOLINT
+	adc_set_single_conversion_mode(ADC1);  // NOLINT
 	//adc_disable_external_trigger_regular(ADC1);
-	adc_set_right_aligned(ADC1);
+	adc_set_right_aligned(ADC1);  // NOLINT
 	adc_eoc_after_each(ADC1);
 	adc_set_resolution(ADC1, ADC_CR1_RES_12BIT);
 	adc_set_sample_time(ADC1, ADC_CHANNEL0 , ADC_SMPR_SMP_48CYC );
@@ -120,7 +122,7 @@ void adc_task(void)
 	}
 	else
 	{
-		printf("Sample done\n");
+		serial_trace("Sample done\n");
 	}
 }
 

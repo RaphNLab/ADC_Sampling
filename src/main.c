@@ -1,6 +1,6 @@
-#include "drivers/timer_drv.h"
-#include "drivers/uart_drv.h"
-#include "drivers/led_driver.h"
+#include "timer_drv.h"
+#include "uart_drv.h"
+#include "led_driver.h"
 #include "ADC_drv.h"
 
 int main(void)
@@ -8,7 +8,7 @@ int main(void)
 	timer_sleep_setup();
 	led_setup();
 
-	serial_debug_setup();
+	uartDevConfig(&myUartDev, MY_USART_DEVICE, uartRxBuffer, uartTxBuffer, USART_DATA_LEN);
 	clock_setup();
 	adc_setup();
 	dma_setup();
@@ -23,7 +23,7 @@ int main(void)
 		int16_t temperature = 0;
 
 		temperature = get_temperature();
-		printf("%d°C\n", temperature);
+		serial_trace("%d°C\n", temperature);
 		adc_task();
 		//__asm__("wfi");
 	}
