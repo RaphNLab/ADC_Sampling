@@ -14,7 +14,6 @@ int main(void)
 	dma_setup();
 	adc_enable_temp();
 	timer_adc_external_trigger_setup();
-
 	adc_enable_dma(ADC1);
 	//adc_start_conversion_regular(ADC1);
 
